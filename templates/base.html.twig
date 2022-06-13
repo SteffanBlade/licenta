@@ -4,6 +4,32 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <style>
+                body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+                body, html {
+                    height: 100%;
+                    line-height: 1.8;
+                }
+                /* Full height image header */
+                .bgimg-1 {
+                    background-position: center;
+                    background-size: cover;
+                    background: #70e1f5;  /* fallback for old browsers */
+                    background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
+                    background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                    min-height: 100%;
+                }
+
+                .w3-bar .w3-button {
+                    padding: 16px;
+                }
+            </style>
+
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -11,6 +37,37 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+        {% block navbar %}
+            <!-- Navbar (sit on top) -->
+            <div class="w3-top">
+                <div class="w3-bar w3-white w3-card" id="myNavbar">
+                    <a href="" class="w3-bar-item w3-button w3-wide">LOGO</a>
+                    <!-- Right-sided navbar links -->
+                    <div class="w3-right w3-hide-small">
+                        <a href="/customer" class="w3-bar-item w3-button"><i class="fa fa-user"></i>My account</a>
+                        <a href="/restaurants" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Restaurants</a>
+                        <a href="/tables" class="w3-bar-item w3-button"><i class="fa fa-usd"></i>Tables</a>
+                        <a href="/reservation" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>Reservations</a>
+                    </div>
+                    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+                    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar on small screens when clicking the menu icon -->
+            <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+                <a href="" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
+                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
+                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+            </nav>
         {% endblock %}
     </head>
     <body>
