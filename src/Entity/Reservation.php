@@ -24,12 +24,14 @@ class Reservation
     #[ORM\Column(type: 'time')]
     private $endTime;
 
-    #[ORM\ManyToOne(targetEntity: Restaurant::class, inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $restaurant;
-
     #[ORM\OneToMany(mappedBy: 'reservation', targetEntity: Table::class)]
     private $tables;
+
+    #[ORM\OneToOne( targetEntity: Table::class, cascade: ['persist', 'remove'])]
+    private $tableLink;
+
+    #[ORM\OneToOne(inversedBy: 'reservation', targetEntity: Restaurant::class, cascade: ['persist', 'remove'])]
+    private $restaurant;
 
     public function __construct()
     {
@@ -77,18 +79,6 @@ class Reservation
         return $this;
     }
 
-    public function getRestaurant(): ?Restaurant
-    {
-        return $this->restaurant;
-    }
-
-    public function setRestaurant(?Restaurant $restaurant): self
-    {
-        $this->restaurant = $restaurant;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Table>
      */
@@ -115,6 +105,30 @@ class Reservation
                 $table->setReservation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTableLink(): ?Table
+    {
+        return $this->tableLink;
+    }
+
+    public function setTableLink(?Table $tableLink): self
+    {
+        $this->tableLink = $tableLink;
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
 
         return $this;
     }

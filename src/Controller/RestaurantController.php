@@ -11,6 +11,10 @@ class RestaurantController extends AbstractController
     #[Route('/restaurant', name: 'app_restaurant')]
     public function index(): Response
     {
+        if(empty($this->getUser())){
+            return $this->redirectToRoute("app_login");
+        }
+
         return $this->render('restaurant/index.html.twig', [
             'controller_name' => 'RestaurantController',
         ]);

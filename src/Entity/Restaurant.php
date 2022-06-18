@@ -33,9 +33,25 @@ class Restaurant
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Reservation::class)]
     private $reservations;
 
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Table::class)]
+    private $tables;
+
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    private $ThumbnailName;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $description;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
+
+    #[ORM\OneToOne(mappedBy: 'restaurant', targetEntity: Reservation::class, cascade: ['persist', 'remove'])]
+    private $reservation;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->tables = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,6 +151,94 @@ class Restaurant
 
     public function __toString(): string
     {
-        return $this->getEmail() . ' ' . $this->getPhone();
+        return $this->getName() . ' ' . $this->getLocation();
+    }
+
+    /**
+     * @return Collection<int, Table>
+     */
+    public function getTables(): Collection
+    {
+        return $this->tables;
+    }
+
+    public function addTable(Table $table): self
+    {
+        if (!$this->tables->contains($table)) {
+            $this->tables[] = $table;
+            $table->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTable(Table $table): self
+    {
+        if ($this->tables->removeElement($table)) {
+            // set the owning side to null (unless already changed)
+            if ($table->getRestaurant() === $this) {
+                $table->setRestaurant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getThumbnailName(): ?string
+    {
+        return $this->ThumbnailName;
+    }
+
+    public function setThumbnailName(?string $ThumbnailName): self
+    {
+        $this->ThumbnailName = $ThumbnailName;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->reservation;
+    }
+
+    public function setReservation(?Reservation $reservation): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($reservation === null && $this->reservation !== null) {
+            $this->reservation->setRestaurant(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($reservation !== null && $reservation->getRestaurant() !== $this) {
+            $reservation->setRestaurant($this);
+        }
+
+        $this->reservation = $reservation;
+
+        return $this;
     }
 }

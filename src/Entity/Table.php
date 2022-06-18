@@ -29,6 +29,24 @@ class Table
     #[ORM\ManyToOne(targetEntity: Reservation::class, inversedBy: 'tables')]
     private $reservation;
 
+    #[ORM\ManyToOne(targetEntity: Restaurant::class, inversedBy: 'tables')]
+    private $restaurant;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $description;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $status;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $reserveFrom;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $reserveTo;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $thumbNailName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +114,79 @@ class Table
 
     public function __toString(): string
     {
-        return $this->getType() . ' ' . $this->getChairsNumber();
+        return 'Masa: '. $this->getType() . ' ' . $this->getChairsNumber() . ' - Restaurant: ' . $this->getRestaurant();
+    }
+
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getReserveFrom(): ?\DateTimeInterface
+    {
+        return $this->reserveFrom;
+    }
+
+    public function setReserveFrom(?\DateTimeInterface $reserveFrom): self
+    {
+        $this->reserveFrom = $reserveFrom;
+
+        return $this;
+    }
+
+    public function getReserveTo(): ?\DateTimeInterface
+    {
+        return $this->reserveTo;
+    }
+
+    public function setReserveTo(?\DateTimeInterface $reserveTo): self
+    {
+        $this->reserveTo = $reserveTo;
+
+        return $this;
+    }
+
+    public function getThumbNailName(): ?string
+    {
+        return $this->thumbNailName;
+    }
+
+    public function setThumbNailName(?string $thumbNailName): self
+    {
+        $this->thumbNailName = $thumbNailName;
+
+        return $this;
     }
 }

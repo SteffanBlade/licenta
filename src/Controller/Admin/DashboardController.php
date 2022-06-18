@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Controller\Admin;
-use App\Entity\Table;
-use App\Entity\Restaurant;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,10 +40,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         $adminUrlGenerator = $this->container->get( \EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator::class);
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_home_page');
-//        todo: use linkToEntity
-        yield MenuItem::linkToUrl('Tables', 'fas fa-list', $adminUrlGenerator->setController(\App\Controller\Admin\TableCrudController::class)->generateUrl());
-        yield MenuItem::linkToUrl('Restaurants', 'fas fa-comments', $adminUrlGenerator->setController(RestaurantCrudController::class)->generateUrl());
+        yield MenuItem::linkToDashboard('Meniu admin', 'fa fa-home');
+        yield MenuItem::linktoRoute('Inapoi la site', 'fas fa-home', 'app_home_page');
+        yield MenuItem::linkToUrl('Mese', 'fas fa-list', $adminUrlGenerator->setController(\App\Controller\Admin\TableCrudController::class)->generateUrl());
+        yield MenuItem::linkToUrl('Restaurante', 'fas fa-comments', $adminUrlGenerator->setController(RestaurantCrudController::class)->generateUrl());
+        yield MenuItem::linkToUrl('Rezervari', 'fas fa-comments', $adminUrlGenerator->setController(ReservationCrudController::class)->generateUrl());
     }
 }

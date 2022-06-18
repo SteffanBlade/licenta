@@ -8,6 +8,10 @@
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'><link rel="stylesheet" href="./style.css">
             <style>
                 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
@@ -19,9 +23,7 @@
                 .bgimg-1 {
                     background-position: center;
                     background-size: cover;
-                    background: #70e1f5;  /* fallback for old browsers */
-                    background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
-                    background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                   background-image: url({{ asset("uploads/homepage/main_header.jpg") }});
                     min-height: 100%;
                 }
 
@@ -43,13 +45,13 @@
             <!-- Navbar (sit on top) -->
             <div class="w3-top">
                 <div class="w3-bar w3-white w3-card" id="myNavbar">
-                    <a href="" class="w3-bar-item w3-button w3-wide">LOGO</a>
+                    <a href="/" class="w3-bar-item w3-button w3-wide"><img style="height: 30px; width: 30px" src="{{ asset("uploads/homepage/logo.png") }}"></a>
                     <!-- Right-sided navbar links -->
                     <div class="w3-right w3-hide-small">
-                        <a href="/customer" class="w3-bar-item w3-button"><i class="fa fa-user"></i>My account</a>
-                        <a href="/restaurants" class="w3-bar-item w3-button"><i class="fa fa-th"></i>Restaurants</a>
-                        <a href="/tables" class="w3-bar-item w3-button"><i class="fa fa-usd"></i>Tables</a>
-                        <a href="/reservation" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i>Reservations</a>
+                        <a href="/customer" class="w3-bar-item w3-button"><i class="fa fa-user"> </i> Contul meu</a>
+                        <a href="/restaurants" class="w3-bar-item w3-button"><i class="fa fa-th"></i> Restaurante</a>
+                        <a href="/tables" class="w3-bar-item w3-button"><i class="fa fa-usd"> </i> Mese</a>
+                        <a href="/reservations" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> Rezervarile mele</a>
                     </div>
                     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -62,11 +64,11 @@
             <!-- Sidebar on small screens when clicking the menu icon -->
             <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
                 <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-                <a href="" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
-                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
-                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
-                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
-                <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+                <a href="{{ path('app_home_page') }}" onclick="w3_close()" class="w3-bar-item w3-button">Acasa</a>
+                <a href="{{ path('app_restaurants') }}" onclick="w3_close()" class="w3-bar-item w3-button">Restaurante</a>
+                <a href="{{ path('app_tables') }}" onclick="w3_close()" class="w3-bar-item w3-button">Mese</a>
+                <a href="{{ path('app_customer') }}" onclick="w3_close()" class="w3-bar-item w3-button">Contul meu</a>
+
             </nav>
         {% endblock %}
     </head>

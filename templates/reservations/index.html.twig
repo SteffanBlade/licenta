@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReservationsController!{% endblock %}
+
+{% block body %}
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+<div style="margin-top: 5rem" class="example-wrapper">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Comanda minima</th>
+            <th scope="col">De la ora</th>
+            <th scope="col">Pana la ora</th>
+        </tr>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.price }}</td>
+                <td>{{ reservation.startHour|date('H:m:s') }}</td>
+                <td>{{ reservation.endTime|date('H:m:s') }}</td>
+            </tr>
+        {% endfor %}
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
